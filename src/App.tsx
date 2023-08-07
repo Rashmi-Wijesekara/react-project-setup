@@ -1,26 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Dashboard } from './pages';
+import { Header, Navbar } from './containers'
+import { useSearchParams } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { SessionHandler, SessionType } from './utils';
+import { LangContext, LangContextType } from './context/LangContext';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <Header />
+      <Navbar />
+      <Inner />
+    </BrowserRouter>
+  )
 }
+
+function Inner() {
+  const [searchParams] = useSearchParams();
+  const { setupLanguage } = useContext(LangContext) as LangContextType
+
+  useEffect(() => {
+    const currentParams = Object.fromEntries([...searchParams]);
+    console.log(currentParams);
+
+    let userId: string = ""
+    let lang: string = ""
+
+    for (let para in currentParams) {
+      if (para === 'userId') {
+        userId = currentParams[para];
+      }
+      else if (para === 'lang') {
+        lang = currentParams[para];
+      }
+    }
+
+    let sessionData: SessionType = {
+      userId: userId,
+      lang: lang
+    }
+
+    let session = new SessionHandler()
+    session.saveSession(sessionData)
+    setupLanguage(lang)
+  });
+
+  return (
+    <Routes>
+      <Route path="/" element={
+        <Dashboard />
+      } />
+      <Route path="users/:id" element={
+        <div>
+          user one
+        </div>
+      } />
+    </Routes>
+  )
+}
+
 
 export default App;
