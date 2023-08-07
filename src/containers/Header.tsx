@@ -4,16 +4,17 @@ import { Dropdown } from '../components'
 import { useTranslation } from "react-i18next";
 import { SessionHandler, SessionType } from '../utils';
 import { LangContext, LangContextType } from '../context/LangContext';
+import { getUserById } from '../api/Client';
 
 export const Header = () => {
 	const { i18n: { changeLanguage } } = useTranslation();
-	const { currentLanguage } = useContext(LangContext) as LangContextType
+	const { currentLanguage, user } = useContext(LangContext) as LangContextType
 
 	type langProp = {
 		option: string,
 		id: string
 	}
-	
+
 	const langList: langProp[] = [
 		{ id: 'en', option: 'English' },
 		{ id: 'si', option: 'සිංහල' },
@@ -48,7 +49,12 @@ export const Header = () => {
 			setSelectedLanguage(lang)
 			selectLanguageHandler(lang)
 		}
-	}, [currentLanguage])
+
+		// let session = new SessionHandler()
+		// const user = session.getUserDetails()
+
+		// console.log(user)
+	}, [currentLanguage, user])
 
 	return (
 		<header className="bg-white border-b-2 fixed top-0 left-0 right-0 z-10">
@@ -123,9 +129,9 @@ export const Header = () => {
 
 								<div>
 									<p className="text-xs">
-										<strong className="block font-medium">Eric Frusciante</strong>
+										<strong className="block font-medium">{user?.name}</strong>
 
-										<span> eric@frusciante.com </span>
+										<span> {user?.email} </span>
 									</p>
 								</div>
 							</a>
