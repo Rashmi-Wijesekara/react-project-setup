@@ -28,28 +28,33 @@ const App: React.FC = () => {
 function Inner() {
   const [searchParams] = useSearchParams();
   const { setupLanguage, setUserDetails } = useContext(LangContext) as LangContextType
+  let session = new SessionHandler()
 
   useEffect(() => {
     const currentParams = Object.fromEntries([...searchParams]);
     console.log(currentParams);
 
-    for (let para in currentParams) {
-      if (para === 'userId') {
-        userId = currentParams[para];
+    if (Object.keys(currentParams).length > 0) {
+      for (let para in currentParams) {
+        if (para === 'userId') {
+          userId = currentParams[para];
+        }
+        else if (para === 'lang') {
+          lang = currentParams[para];
+        }
       }
-      else if (para === 'lang') {
-        lang = currentParams[para];
+
+      let sessionData: SessionType = {
+        userId: userId,
+        lang: lang
       }
+
+      session.saveSession(sessionData)
+      setupLanguage(lang)
     }
 
-    let sessionData: SessionType = {
-      userId: userId,
-      lang: lang
-    }
-
-    let session = new SessionHandler()
-    session.saveSession(sessionData)
-    setupLanguage(lang)
+    const sessionVal = session.getSession()
+    setupLanguage(sessionVal.lang)
 
     // get user details
     async function getUserDetails() {
