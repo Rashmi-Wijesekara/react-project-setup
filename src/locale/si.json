@@ -1,6 +1,9 @@
 {
   "translation": {
     "LblDashboard": "උපකරණ පුවරුව",
-		"LblLogout": "පිටවීම"
+		"LblLogout": "පිටවීම",
+    "BtnAddUser": "පරිශීලක එකතු කරන්න",
+    "LblName": "නම",
+    "LblEmailAddress": "ඊතැපැල් ලිපිනය"
   }
 }

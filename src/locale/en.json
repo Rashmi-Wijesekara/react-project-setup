@@ -1,6 +1,9 @@
 {
   "translation": {
     "LblDashboard": "Dashboard",
-		"LblLogout": "Logout"
+		"LblLogout": "Logout",
+    "BtnAddUser": "Add User",
+    "LblName": "Name",
+    "LblEmailAddress": "Email Address"
   }
 }

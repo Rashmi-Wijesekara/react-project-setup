@@ -1,4 +1,3 @@
-import { get } from "http";
 
 export type SessionType = {
 	userId: string,

@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
 import { useTranslation } from "react-i18next";
+import { useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {
 	const { t } = useTranslation();
+	const navigate = useNavigate()
+
 	// const [currentLanguage, setCurrentLanguage] = useState(language)
 
 	// console.log(language)
@@ -24,12 +26,12 @@ export const Navbar = () => {
 
 					<ul className="mt-6 space-y-1">
 						<li>
-							<a
-								href=""
-								className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
+							<div
+								onClick={()=> navigate("/")}
+								className="block rounded-lg cursor-pointer bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
 							>
 								{t('LblDashboard')}
-							</a>
+							</div>
 						</li>
 
 						{/* <li>
@@ -159,12 +161,11 @@ export const Navbar = () => {
 				</div>
 
 				<div className="w-full px-4 pb-6">
-					<a
+					<div
 						className="block rounded-md text-center bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-						href="/"
 					>
 						{t('LblLogout')}
-					</a>
+					</div>
 				</div>
 
 			</div>

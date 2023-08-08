@@ -1,1 +1,1 @@
-export * from './SessionHandler'
+export * from './session-handler'

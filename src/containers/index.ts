@@ -1,3 +1,3 @@
-export * from './Header'
-export * from './Navbar'
-export * from './PageContainer'
+export * from './header.component'
+export * from './navbar.component'
+export * from './page-container.component'

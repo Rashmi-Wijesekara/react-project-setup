@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './i18n.ts'
-import LangProvider from './context/LangContext';
+import LangProvider from './context/lang.context';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

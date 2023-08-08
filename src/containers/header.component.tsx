@@ -1,14 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Dropdown } from '../components'
 import { useTranslation } from "react-i18next";
 import { SessionHandler, SessionType } from '../utils';
-import { LangContext, LangContextType } from '../context/LangContext';
-import { getUserById } from '../api/Client';
+import { LangContext, LangContextType } from '../context/lang.context';
+import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
 	const { i18n: { changeLanguage } } = useTranslation();
 	const { currentLanguage, user } = useContext(LangContext) as LangContextType
+	const navigate = useNavigate()
 
 	type langProp = {
 		option: string,
@@ -53,8 +54,12 @@ export const Header = () => {
 		// let session = new SessionHandler()
 		// const user = session.getUserDetails()
 
-		// console.log(user)
+		console.log(user)
 	}, [currentLanguage, user])
+
+	const profileNavHandler = () => {
+		navigate("/users/" + user?.id)
+	}
 
 	return (
 		<header className="bg-white border-b-2 fixed top-0 left-0 right-0 z-10">
@@ -119,8 +124,8 @@ export const Header = () => {
 
 					<div className="flex items-center gap-4">
 
-						<div className="">
-							<a href="#" className="flex items-center gap-2 bg-white p-2 hover:bg-gray-50">
+						{user !== null && (
+							<div onClick={() => profileNavHandler()} className="flex items-center gap-2 bg-white p-2 hover:bg-gray-50 cursor-pointer">
 								<img
 									alt="Man"
 									src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
@@ -134,8 +139,7 @@ export const Header = () => {
 										<span> {user?.email} </span>
 									</p>
 								</div>
-							</a>
-						</div>
+							</div>)}
 
 						<Dropdown
 							optionsList={langList}

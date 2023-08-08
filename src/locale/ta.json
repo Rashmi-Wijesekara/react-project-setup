@@ -1,6 +1,9 @@
 {
   "translation": {
     "LblDashboard": "டாஷ்போர்டு",
-		"LblLogout": "வெளியேறு"
+		"LblLogout": "வெளியேறு",
+    "BtnAddUser": "பயனரைச் சேர்க்கவும்",
+    "LblName": "பெயர்",
+    "LblEmailAddress": "மின்னஞ்சல் முகவரி"
   }
 }
