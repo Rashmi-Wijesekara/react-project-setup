@@ -1,13 +1,12 @@
-import { Suspense, lazy, useState, useTransition } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import { PageContainer } from '../containers'
-// import Modal from '../components/modal.component'
 import Table from '../components';
 import { useTranslation } from 'react-i18next';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // const Table = lazy(() => import('../components'))
-// const Modal = lazy(() => import('../components/modal.component'))
+const Modal = lazy(() => import('../components/modal.component'))
 
 const PostsListComponent = lazy(() => import('../containers/blog-posts-list'))
 
@@ -22,10 +21,6 @@ const Dashboard = () => {
 	const [modalOpen, setModalOpen] = useState<boolean>(false)
 	const [postsList, setPostsList] = useState<boolean>(false)
 	const [addedUser, setAddedUser] = useState<userProp[]>(sampleUser)
-
-	// useTransition is used to let React know there will be a
-	// rerender and component load when the button is pressed.
-	const [, startTransition] = useTransition();
 
 	const { t } = useTranslation();
 
@@ -61,49 +56,7 @@ const Dashboard = () => {
 				transition: Slide
 			});
 		}
-
-		
 	}
-
-	// useEffect(() => {
-	// 	if (modalOpen) {
-	// 		Modal = lazy(() => import('../components/modal.component'))
-	// 	}
-	// }, [modalOpen])
-
-	const renderLazyModal = () => {
-		const Modal = lazy(() => import(/* webpackChunkName: 'addUserModal' */'../components/modal.component'))
-
-		return (
-			<Suspense fallback={<PageContainer>Loading...</PageContainer>}>
-				<Modal
-					openStatus={modalOpen}
-					setOpenStatus={(status: boolean) => getModalStatus(status)}
-					buttonName="Add User"
-					buttonHandler={(data: userProp) => getModalData(data)}
-				/>
-			</Suspense>
-		)
-	}
-
-	const postsListVisibleHandler = () => {
-		startTransition(() => {
-			setPostsList(true);
-		})
-	}
-
-	const lazyPostsListRender = () => {
-		// const PostsListComponent = lazy(() => import('../containers/blog-posts-list'))
-
-		return (
-			<Suspense fallback={<PageContainer>Loading...</PageContainer>}>
-				<PostsListComponent />
-			</Suspense>
-		)
-	}
-
-	// const loadPostsComponent = () => import('../containers/blog-posts-list');
-	// const Comp = lazy(loadPostsComponent);
 
 	return (
 		<PageContainer>
@@ -118,15 +71,14 @@ const Dashboard = () => {
 			</button>
 
 			{modalOpen && (
-				// <Suspense fallback={<PageContainer>Loading...</PageContainer>}>
-				// 	<Modal
-				// 		openStatus={modalOpen}
-				// 		setOpenStatus={(status: boolean) => getModalStatus(status)}
-				// 		buttonName="Add User"
-				// 		buttonHandler={(data: userProp) => getModalData(data)}
-				// 	/>
-				// </Suspense>
-				renderLazyModal()
+				<Suspense fallback={<PageContainer>Loading...</PageContainer>}>
+					<Modal
+						openStatus={modalOpen}
+						setOpenStatus={(status: boolean) => getModalStatus(status)}
+						buttonName="Add User"
+						buttonHandler={(data: userProp) => getModalData(data)}
+					/>
+				</Suspense>
 			)}
 
 			<Table {...addedUser} />
@@ -336,21 +288,19 @@ const Dashboard = () => {
 				</div>
 			</div>
 
-			<button onClick={() => postsListVisibleHandler()}>
+			<button onClick={() => {
+				setPostsList(true);
+			}}>
 				click here
 			</button>
 
-			{/* <button onClick={Comp}>
-				click here
-			</button> */}
-
-			{/* <loadPostsComponent /> */}
-
-			{postsList && (<div className="my-5 flex flex-wrap">
-				{
-					lazyPostsListRender()
-				}
-			</div>)}
+			{postsList && (
+				<Suspense fallback={<PageContainer>Loading...</PageContainer>}>
+					<div className="my-5 flex flex-wrap">
+						<PostsListComponent />
+					</div>
+				</Suspense>
+			)}
 
 		</PageContainer>
 	)
