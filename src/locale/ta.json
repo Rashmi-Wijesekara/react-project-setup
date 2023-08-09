@@ -5,6 +5,14 @@
     "BtnAddUser": "பயனரைச் சேர்க்கவும்",
     "LblName": "பெயர்",
     "LblEmailAddress": "மின்னஞ்சல் முகவரி",
-    "LblSamplePage": "மாதிரி பக்கம்"
+    "LblSamplePage": "மாதிரி பக்கம்",
+
+    "Error": {
+      "ErrorUser": "தவறான பயனர்பெயர்"
+    },
+
+    "Success": {
+      "SuccessUser": "பயனர் வெற்றிகரமாக சேர்க்கப்பட்டார்"
+    }
   }
 }

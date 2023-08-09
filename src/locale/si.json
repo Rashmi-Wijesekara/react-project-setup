@@ -5,6 +5,14 @@
     "BtnAddUser": "පරිශීලක එකතු කරන්න",
     "LblName": "නම",
     "LblEmailAddress": "ඊතැපැල් ලිපිනය",
-    "LblSamplePage": "නියැදි පිටුව"
+    "LblSamplePage": "නියැදි පිටුව",
+
+    "Error": {
+      "ErrorUser": "වලංගු නොවන පරිශීලක නාමය"
+    },
+
+    "Success": {
+      "SuccessUser": "පරිශීලකයා සාර්ථකව එකතු කරන ලදී"
+    }
   }
 }

@@ -5,6 +5,14 @@
     "BtnAddUser": "Add User",
     "LblName": "Name",
     "LblEmailAddress": "Email Address",
-    "LblSamplePage": "Sample Page"
+    "LblSamplePage": "Sample Page",
+
+    "Error": {
+      "ErrorUser": "Invalid username"
+    },
+
+    "Success": {
+      "SuccessUser": "Successfully added user"
+    }
   }
 }
