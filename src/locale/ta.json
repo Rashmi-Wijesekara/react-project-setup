@@ -4,6 +4,7 @@
 		"LblLogout": "வெளியேறு",
     "BtnAddUser": "பயனரைச் சேர்க்கவும்",
     "LblName": "பெயர்",
-    "LblEmailAddress": "மின்னஞ்சல் முகவரி"
+    "LblEmailAddress": "மின்னஞ்சல் முகவரி",
+    "LblSamplePage": "மாதிரி பக்கம்"
   }
 }

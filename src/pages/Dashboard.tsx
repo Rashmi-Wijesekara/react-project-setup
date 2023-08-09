@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { LazyExoticComponent, Suspense, lazy, useEffect, useState } from 'react'
 import { PageContainer } from '../containers'
-import Modal from '../components/modal.component'
+// import Modal from '../components/modal.component'
 import Table from '../components';
 import { useTranslation } from 'react-i18next';
 // const Table = lazy(() => import('../components'))
-// const Modal = lazy(() => import('../components/Modal'))
+// const Modal = lazy(() => import('../components/modal.component'))
 
 type userProp = {
 	name: string;
@@ -31,11 +31,27 @@ const Dashboard = () => {
 		setAddedUser([...addedUser, modalData])
 	}
 
-	// const Table = (rowData: { username: string; email: string }) => {
-	// 	return (
-	// 		props = rowData
-	// 	)
-	// }
+	// useEffect(() => {
+	// 	if (modalOpen) {
+	// 		Modal = lazy(() => import('../components/modal.component'))
+	// 	}
+	// }, [modalOpen])
+
+	const renderLazyModal = () => {
+		const Modal = lazy(() => import('../components/modal.component'))
+
+		return (
+			<Suspense fallback={<PageContainer>Loading...</PageContainer>}>
+				<Modal
+					openStatus={modalOpen}
+					setOpenStatus={(status: boolean) => getModalStatus(status)}
+					buttonName="Add User"
+					buttonHandler={(data: userProp) => getModalData(data)}
+				/>
+			</Suspense>
+		)
+	}
+
 	return (
 		<PageContainer>
 			<button
@@ -45,12 +61,17 @@ const Dashboard = () => {
 				{t('BtnAddUser')}
 			</button>
 
-			<Modal
-				openStatus={modalOpen}
-				setOpenStatus={(status: boolean) => getModalStatus(status)}
-				buttonName="Add User"
-				buttonHandler={(data: userProp) => getModalData(data)}
-			/>
+			{modalOpen && (
+				// <Suspense fallback={<PageContainer>Loading...</PageContainer>}>
+				// 	<Modal
+				// 		openStatus={modalOpen}
+				// 		setOpenStatus={(status: boolean) => getModalStatus(status)}
+				// 		buttonName="Add User"
+				// 		buttonHandler={(data: userProp) => getModalData(data)}
+				// 	/>
+				// </Suspense>
+				renderLazyModal()
+			)}
 
 			<Table {...addedUser} />
 		</PageContainer>

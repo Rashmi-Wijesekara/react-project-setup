@@ -4,6 +4,7 @@
 		"LblLogout": "පිටවීම",
     "BtnAddUser": "පරිශීලක එකතු කරන්න",
     "LblName": "නම",
-    "LblEmailAddress": "ඊතැපැල් ලිපිනය"
+    "LblEmailAddress": "ඊතැපැල් ලිපිනය",
+    "LblSamplePage": "නියැදි පිටුව"
   }
 }

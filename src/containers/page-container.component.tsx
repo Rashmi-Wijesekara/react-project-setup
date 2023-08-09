@@ -7,7 +7,7 @@ type fromProps = {
 
 export const PageContainer = (props: PropsWithChildren<fromProps>) => {
 	return (
-		<div className="w-[calc(100vw-200px)] absolute top-[65px] left-[200px] p-3 min-h-[100vh-65px]">
+		<div className="w-[calc(100vw-200px)] max-w-[calc(100vw-200px)] overflow-x-hidden absolute top-[65px] left-[200px] p-3 min-h-[100vh-65px]">
 			{props.children}
 		</div>
 	)

@@ -4,6 +4,7 @@
 		"LblLogout": "Logout",
     "BtnAddUser": "Add User",
     "LblName": "Name",
-    "LblEmailAddress": "Email Address"
+    "LblEmailAddress": "Email Address",
+    "LblSamplePage": "Sample Page"
   }
 }

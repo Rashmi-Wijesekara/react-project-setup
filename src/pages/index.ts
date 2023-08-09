@@ -1,3 +1,7 @@
 export { default as Dashboard } from './dashboard'
 export { default as Profile } from './profile'
 export { default as NotFound } from './not-found'
+export { default as Page1} from './page-1'
+export { default as Page2 } from './page-2'
+export { default as Page3 } from './page-3'
+export { default as Page4 } from './page-4'
