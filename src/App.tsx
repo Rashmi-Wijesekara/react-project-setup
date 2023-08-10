@@ -6,6 +6,7 @@ import React, { Suspense, useContext, useEffect } from 'react';
 import { SessionHandler, SessionType } from './utils';
 import { LangContext, LangContextType } from './context/lang.context';
 import { getUserById } from './api/client';
+import { CookiesProvider, useCookies } from "react-cookie";
 
 // import { Dashboard, NotFound, Profile, Page1, Page2, Page3, Page4 } from './pages';
 
@@ -21,11 +22,14 @@ let userId: string = ""
 let lang: string = ""
 
 const App: React.FC = () => {
+
   return (
-    <BrowserRouter>
-      <Header />
-      <Navbar />
-      <Inner />
+    <BrowserRouter basename='/TMS'>
+      <CookiesProvider>
+        <Header />
+        <Navbar />
+        <Inner />
+      </CookiesProvider>
     </BrowserRouter>
   )
 }
@@ -34,6 +38,7 @@ function Inner() {
   const [searchParams] = useSearchParams();
   const { setupLanguage, setUserDetails } = useContext(LangContext) as LangContextType
   let session = new SessionHandler()
+  const [cookies, setCookie] = useCookies(["user"]);
 
   useEffect(() => {
     const currentParams = Object.fromEntries([...searchParams]);
@@ -61,6 +66,8 @@ function Inner() {
     const sessionVal = session.getSession()
     setupLanguage(sessionVal.lang)
 
+    let userToCookie
+
     // get user details
     async function getUserDetails() {
       const res = await getUserById(userId)
@@ -68,6 +75,7 @@ function Inner() {
       if (res) {
         const user = session.getUserDetails()
         setUserDetails(user)
+        userToCookie = user
       }
     }
 
@@ -76,7 +84,12 @@ function Inner() {
     } else {
       const user = session.getUserDetails()
       setUserDetails(user)
+      userToCookie = user
     }
+
+    console.log('first')
+    setCookie('user', userToCookie, { path: '/' })
+    console.log(cookies.user)
   }, []);
 
   return (
